@@ -26,10 +26,6 @@ public class LoginRequest implements Serializable {
 	@Schema(description = "Username of the user", example = "john_doe")
 	private String username;
 
-	@Nullable
-	@Schema(description = "Email address of the user", example = "john@example.com")
-	private String email;
-
 	@Schema(description = "Password of the user", example = "securePassword123")
 	private String password;
 
