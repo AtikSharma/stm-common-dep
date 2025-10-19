@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
+import java.util.List;
 
 @Component
 public class UserServiceClientImpl implements UserServiceClient {
@@ -50,6 +51,15 @@ public class UserServiceClientImpl implements UserServiceClient {
                 .addPathSegment(userId).build();
         RequestContext.setAuthorizationToken(jwtUtils.generateSystemToken());
         return restTemplate.exchange(URI.create(url), HttpMethod.GET, HttpEntity.EMPTY, User.class).getBody();
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        String url = URLBuilder.builder().protocol("http").serviceName(serviceName)
+                .addPathSegment(CommonConstants.BASE_URL_USER_V1)
+                .build();
+        RequestContext.setAuthorizationToken(jwtUtils.generateSystemToken());
+        return (List<User>) restTemplate.exchange(URI.create(url), HttpMethod.GET, HttpEntity.EMPTY, List.class).getBody();
     }
 
 }
