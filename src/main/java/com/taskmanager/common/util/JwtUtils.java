@@ -58,7 +58,7 @@ public class JwtUtils {
 
         String accessToken = Jwts.builder().header().add(JwtConstants.TYPE, TokenType.JWT).and()
                 .issuer(JwtConstants.JWT_ISSUER).subject(JwtConstants.SUBJECT).id(randomUUID).expiration(expiryDate)
-                .issuedAt(currentDate).claim(JwtConstants.ID, userBase.getId())
+                .issuedAt(currentDate).claim(JwtConstants.USER_ID, userBase.getId())
                 .claim(JwtConstants.CORRELATION_ID, RequestContext.getCorrelationId())
                 .claim(JwtConstants.USERNAME, userBase.getUsername()).claim(JwtConstants.EMAIL, userBase.getEmail())
                 .claim(JwtConstants.ROLE, userBase.getRole()).signWith(getKey()).compact();
@@ -158,5 +158,10 @@ public class JwtUtils {
         Header header = Jwts.parser().verifyWith((SecretKey) getKey()).build().parseSignedClaims(token).getHeader();
         BiPredicate<Header, String> isTokenTypeValid = (c, t) -> c.getType().equals(t);
         return isTokenTypeValid.test(header, refresh);
+    }
+
+    public String extractUserIdFromToken(String authorizationHeader) {
+        Claims claims = validateAuthorizationHeader(authorizationHeader);
+        return claims.get(JwtConstants.USER_ID, String.class);
     }
 }

@@ -30,11 +30,16 @@ public class CommonConstants {
     public static final String PATH_USER = "user";
     public static final String PATH_USERNAME = "username";
     public static final String PATH_LOGIN = "login";
+    public static final String PATH_LOGOUT = "logout";
     public static final String PATH_SEARCH = "search";
     public static final String PATH_REFRESH_TOKEN = "refresh-token";
     public static final String PATH_ROLE_STATUS = "role-status";
+    public static final String PATH_ASSIGNEE = "assignee";
+
     public static final String PATH_VARIABLE_ID = "/{id}";
     public static final String PATH_VARIABLE_USERNAME = "/{username}";
+    public static final String PATH_VARIABLE_TASK_ID = "/{taskId}";
+    public static final String PATH_VARIABLE_USER_ID = "/{userId}";
 
     public static final String BASE_URL = API_PATH + FORWARD_SLASH + V1;
     public static final String BASE_URL_USER_V1 = BASE_URL + FORWARD_SLASH + USERS;
@@ -47,6 +52,7 @@ public class CommonConstants {
 
     public static final String API_AUTH_LOGIN = FORWARD_SLASH + PATH_LOGIN;
     public static final String API_AUTH_REFRESH_TOKEN = FORWARD_SLASH + PATH_REFRESH_TOKEN;
+    public static final String API_AUTH_LOGOUT = FORWARD_SLASH + PATH_LOGOUT;
 
     public static final String API_USERS_REGISTER = FORWARD_SLASH + PATH_REGISTER;
     public static final String API_GET_USER_BY_USERNAME = FORWARD_SLASH + PATH_USERNAME + PATH_VARIABLE_USERNAME;
@@ -55,4 +61,7 @@ public class CommonConstants {
     public static final String API_UPDATE_STATUS_ROLE = FORWARD_SLASH + PATH_ROLE_STATUS + PATH_VARIABLE_ID;
 
     public static final String API_SEARCH = FORWARD_SLASH + PATH_SEARCH;
+    public static final String TASK_ID_PATH = PATH_VARIABLE_TASK_ID;
+    public static final String ASSIGNED_TO_USER_API =  PATH_VARIABLE_TASK_ID + FORWARD_SLASH + PATH_ASSIGNEE + PATH_VARIABLE_USER_ID ;
+
 }
