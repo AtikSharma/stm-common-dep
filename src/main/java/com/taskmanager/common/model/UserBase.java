@@ -7,19 +7,22 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor
 public class UserBase {
 
-	private String id;
+    private String id;
 
-	private String username;
+    private String firstName;
 
-	private String email;
+    private String lastName;
 
-	private String password;
+    private LocalDateTime createdAt;
 
-	private Role role;
+    private LocalDateTime updatedAt;
+
 }

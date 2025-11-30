@@ -27,13 +27,15 @@ public class TaskBase {
 
     private Priority priority;
 
-    private UserBase createdBy;
-
     private UserBase assignedTo;
 
     private LocalDate dueDate;
 
+    private UserBase createdBy;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
+    private UserBase updatedBy;
 }

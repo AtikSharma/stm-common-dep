@@ -12,6 +12,7 @@ import java.util.function.BiPredicate;
 
 import javax.crypto.SecretKey;
 
+import com.taskmanager.common.model.User;
 import io.jsonwebtoken.Header;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -50,7 +51,7 @@ public class JwtUtils {
         public static final String REFRESH = "REFRESH";
     }
 
-    public JwtToken generateJwt(UserBase userBase) {
+    public JwtToken generateJwt(User userBase) {
         Instant now = Instant.now();
         Date currentDate = Date.from(now);
         Date expiryDate = Date.from(now.plus(accessTokenExpiration, ChronoUnit.SECONDS));

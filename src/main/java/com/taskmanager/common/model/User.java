@@ -1,13 +1,13 @@
 package com.taskmanager.common.model;
 
-import java.time.LocalDateTime;
-
+import com.taskmanager.common.enums.Role;
 import com.taskmanager.common.enums.Status;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -15,9 +15,13 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class User extends UserBase {
 
-	private Status status;
+    private String username;
 
-	private LocalDateTime createdAt;
+    private String email;
 
-	private LocalDateTime updatedAt;
+    private String password;
+
+    private Status status;
+
+    private Role role;
 }

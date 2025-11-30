@@ -3,6 +3,7 @@ package com.taskmanager.common.client;
 import com.taskmanager.common.RequestContext;
 import com.taskmanager.common.constants.CommonConstants;
 import com.taskmanager.common.model.User;
+import com.taskmanager.common.model.response.GetAllUserResponse;
 import com.taskmanager.common.util.JwtUtils;
 import com.taskmanager.common.util.URLBuilder;
 import org.slf4j.Logger;
@@ -16,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class UserServiceClientImpl implements UserServiceClient {
@@ -35,31 +37,37 @@ public class UserServiceClientImpl implements UserServiceClient {
     }
 
     @Override
-    public User getUserDetailsByUsername(String username) {
+    public User getUserDetailsByUsername(String username, boolean fetchSensitiveInfo) {
         String url = URLBuilder.builder().protocol("http").serviceName(serviceName)
                 .addPathSegment(CommonConstants.BASE_URL_USER_V1)
                 .addPathSegment(CommonConstants.PATH_USERNAME)
-                .addPathSegment(username).build();
-        RequestContext.setAuthorizationToken(jwtUtils.generateSystemToken());
-        return restTemplate.exchange(URI.create(url), HttpMethod.GET, HttpEntity.EMPTY, User.class).getBody();
-    }
-
-    @Override
-    public User getUserDetailsById(String userId) {
-        String url = URLBuilder.builder().protocol("http").serviceName(serviceName)
-                .addPathSegment(CommonConstants.BASE_URL_USER_V1)
-                .addPathSegment(userId).build();
-        RequestContext.setAuthorizationToken(jwtUtils.generateSystemToken());
-        return restTemplate.exchange(URI.create(url), HttpMethod.GET, HttpEntity.EMPTY, User.class).getBody();
-    }
-
-    @Override
-    public List<User> getAllUsers() {
-        String url = URLBuilder.builder().protocol("http").serviceName(serviceName)
-                .addPathSegment(CommonConstants.BASE_URL_USER_V1)
+                .addPathSegment(username)
+                .addQueryParam(CommonConstants.REQUEST_PARAM_IS_DETAILS_REQUIRED, String.valueOf(fetchSensitiveInfo))
                 .build();
         RequestContext.setAuthorizationToken(jwtUtils.generateSystemToken());
-        return (List<User>) restTemplate.exchange(URI.create(url), HttpMethod.GET, HttpEntity.EMPTY, List.class).getBody();
+        return restTemplate.exchange(URI.create(url), HttpMethod.GET, HttpEntity.EMPTY, User.class).getBody();
+    }
+
+    @Override
+    public User getUserDetailsById(String userId,  boolean fetchSensitiveInfo) {
+        String url = URLBuilder.builder().protocol("http").serviceName(serviceName)
+                .addPathSegment(CommonConstants.BASE_URL_USER_V1)
+                .addPathSegment(userId)
+                .addQueryParam(CommonConstants.REQUEST_PARAM_IS_DETAILS_REQUIRED, String.valueOf(fetchSensitiveInfo))
+                .build();
+        RequestContext.setAuthorizationToken(jwtUtils.generateSystemToken());
+        return restTemplate.exchange(URI.create(url), HttpMethod.GET, HttpEntity.EMPTY, User.class).getBody();
+    }
+
+    @Override
+    public List<User> getAllUsers( boolean fetchSensitiveInfo) {
+        String url = URLBuilder.builder().protocol("http").serviceName(serviceName)
+                .addPathSegment(CommonConstants.BASE_URL_USER_V1)
+                .addQueryParam(CommonConstants.REQUEST_PARAM_IS_DETAILS_REQUIRED, String.valueOf(fetchSensitiveInfo))
+                .build();
+        RequestContext.setAuthorizationToken(jwtUtils.generateSystemToken());
+        GetAllUserResponse response = restTemplate.exchange(URI.create(url), HttpMethod.GET, HttpEntity.EMPTY, GetAllUserResponse.class).getBody();
+        return Optional.ofNullable(response).orElseThrow(() -> new RuntimeException("Failed to fetch users from User Service")).users();
     }
 
 }

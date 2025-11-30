@@ -35,6 +35,7 @@ public class CommonConstants {
     public static final String PATH_REFRESH_TOKEN = "refresh-token";
     public static final String PATH_ROLE_STATUS = "role-status";
     public static final String PATH_ASSIGNEE = "assignee";
+    public static final String PATH_STATUS = "status";
 
     public static final String PATH_VARIABLE_ID = "/{id}";
     public static final String PATH_VARIABLE_USERNAME = "/{username}";
@@ -64,4 +65,7 @@ public class CommonConstants {
     public static final String TASK_ID_PATH = PATH_VARIABLE_TASK_ID;
     public static final String ASSIGNED_TO_USER_API =  PATH_VARIABLE_TASK_ID + FORWARD_SLASH + PATH_ASSIGNEE + PATH_VARIABLE_USER_ID ;
 
+    public static final String UPDATE_STATUS_API = PATH_VARIABLE_TASK_ID + FORWARD_SLASH + PATH_STATUS;
+    public static final String REQUEST_PARAM_IS_DETAILS_REQUIRED ="isDetailsRequired" ;
+    public static final String REQUEST_PARAM_INCLUDE_INACTIVE ="includeInactive" ;
 }
