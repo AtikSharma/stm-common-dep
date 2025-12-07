@@ -1,19 +1,17 @@
 package com.taskmanager.common.exception.handler;
 
+import com.taskmanager.common.exception.ApplicationException;
+import com.taskmanager.common.exception.CustomSecurityException;
+import com.taskmanager.common.exception.RestCallException;
+import com.taskmanager.common.model.ErrorResponse;
+import com.taskmanager.common.util.CommonUtility;
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import com.taskmanager.common.exception.ApplicationException;
-import com.taskmanager.common.exception.CustomSecurityException;
-import com.taskmanager.common.exception.RestCallException;
-import com.taskmanager.common.model.ErrorResponse;
-import com.taskmanager.common.util.CommonUtility;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -24,11 +22,11 @@ public class GlobalExceptionHandler {
 				HttpStatus.valueOf(exception.getErrorResponse().getStatus()));
 	}
 
-	@ExceptionHandler(DataIntegrityViolationException.class)
-	public @ResponseBody ResponseEntity<ErrorResponse> handleException(DataIntegrityViolationException exception) {
-		return new ErrorResponse().build(ExceptionUtils.getRootCauseMessage(exception), "Data Error",
-				CommonUtility.getRequestUrl(), HttpStatus.INTERNAL_SERVER_ERROR);
-	}
+//	@ExceptionHandler(DataIntegrityViolationException.class)
+//	public @ResponseBody ResponseEntity<ErrorResponse> handleException(DataIntegrityViolationException exception) {
+//		return new ErrorResponse().build(ExceptionUtils.getRootCauseMessage(exception), "Data Error",
+//				CommonUtility.getRequestUrl(), HttpStatus.INTERNAL_SERVER_ERROR);
+//	}
 
 	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
 	public @ResponseBody ResponseEntity<ErrorResponse> handleMethodNotSupportedException(
