@@ -1,7 +1,5 @@
 package com.taskmanager.common.model;
 
-import com.taskmanager.common.enums.Role;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,12 +11,13 @@ import java.time.LocalDateTime;
 @Setter
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor
-public class UserBase extends Audit{
+public class Audit {
 
-    private String id;
+    private String createdBy;
 
-    private String firstName;
+    private LocalDateTime createdAt;
 
-    private String lastName;
+    private LocalDateTime updatedAt;
 
+    private String updatedBy;
 }

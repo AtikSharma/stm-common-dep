@@ -1,7 +1,8 @@
-package com.taskmanager.common.model;
+package com.taskmanager.common.model.response;
 
 import com.taskmanager.common.enums.Priority;
 import com.taskmanager.common.enums.TaskStatus;
+import com.taskmanager.common.model.UserBase;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,9 +16,9 @@ import java.util.List;
 @Setter
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor
-public class TaskBase extends Audit {
+public class TaskResponse {
 
-    private String id;
+    private String taskId;
 
     private Long taskNumber;
 
@@ -29,9 +30,17 @@ public class TaskBase extends Audit {
 
     private Priority priority;
 
-    private String assignedTo;
-
     private LocalDate dueDate;
 
-    private List<CommentBase> comments;
+    private UserResponse assignedTo;
+
+    private UserResponse createdBy;
+
+    private UserResponse updatedBy;
+
+    private List<CommentResponse> comments;
+
+    private LocalDateTime creationTime;
+
+    private LocalDateTime updateTime;
 }

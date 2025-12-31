@@ -1,5 +1,8 @@
 package com.taskmanager.common.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.taskmanager.common.enums.Role;
 import com.taskmanager.common.enums.Status;
 import lombok.Getter;
@@ -13,6 +16,7 @@ import java.time.LocalDateTime;
 @Setter
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class User extends UserBase {
 
     private String username;

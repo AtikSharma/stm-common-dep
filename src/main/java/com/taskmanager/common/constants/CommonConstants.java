@@ -41,12 +41,15 @@ public class CommonConstants {
     public static final String PATH_VARIABLE_USERNAME = "/{username}";
     public static final String PATH_VARIABLE_TASK_ID = "/{taskId}";
     public static final String PATH_VARIABLE_USER_ID = "/{userId}";
+    public static final String PATH_VARIABLE_COMMENT_ID = "/{commentId}";
+
+    public static final String COMMENTS_API_URL =FORWARD_SLASH + COMMENTS;
 
     public static final String BASE_URL = API_PATH + FORWARD_SLASH + V1;
     public static final String BASE_URL_USER_V1 = BASE_URL + FORWARD_SLASH + USERS;
     public static final String BASE_URL_AUTH_V1 = BASE_URL + FORWARD_SLASH + AUTH;
     public static final String BASE_URL_TASK_V1 = BASE_URL + FORWARD_SLASH + TASKS;
-    public static final String BASE_URL_COMMENT_V1 = BASE_URL + FORWARD_SLASH + COMMENTS;
+    public static final String BASE_URL_COMMENT_V1 = BASE_URL + COMMENTS_API_URL ;
 
     public static final String SPACE = " ";
     public static final String BEARER = "Bearer";

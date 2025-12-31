@@ -8,4 +8,8 @@ public enum Role {
 	public static List<Role> getRoleList(Role... roles) {
 		return List.of(roles);
 	}
+
+    public static List<Role> getNonAdminRoles() {
+        return List.of(MANAGER, USER, SYSTEM);
+    }
 }
